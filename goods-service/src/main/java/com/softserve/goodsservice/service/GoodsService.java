@@ -5,6 +5,8 @@ import com.softserve.goodsservice.repository.GoodsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class GoodsService {
 
@@ -13,6 +15,10 @@ public class GoodsService {
 
     public Goods findById(Long id) {
         return goodsRepository.findById(id).get();
+    }
+
+    public List<Goods> findByIds(List<Long> Ids) {
+        return goodsRepository.findByIdIn(Ids);
     }
 
 }
