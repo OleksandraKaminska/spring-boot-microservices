@@ -30,4 +30,10 @@ public class Goods {
         this.price = price;
     }
 
+    public Goods(long id, String name, BigDecimal price) {
+        this.id = id;
+        this.name = name;
+        this.price = price;
+    }
+
 }

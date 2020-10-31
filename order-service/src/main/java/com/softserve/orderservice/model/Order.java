@@ -42,4 +42,12 @@ public class Order {
         this.items = items;
     }
 
+    public Order(long id, long userId, String shippingDestination, Date orderDate, List<Item> items) {
+        this.id = id;
+        this.userId = userId;
+        this.shippingDestination = shippingDestination;
+        this.orderDate = orderDate;
+        this.items = items;
+    }
+
 }

@@ -34,4 +34,10 @@ public class Item {
         this.goodsId = goodsId;
     }
 
+    public Item(long id, Order order, long goodsId) {
+        this.id = id;
+        this.order = order;
+        this.goodsId = goodsId;
+    }
+
 }
