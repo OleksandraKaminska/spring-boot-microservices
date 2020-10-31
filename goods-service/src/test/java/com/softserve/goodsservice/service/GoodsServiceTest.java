@@ -24,7 +24,7 @@ class GoodsServiceTest {
     private GoodsService goodsService;
 
     @Test
-    void findByIdTest() {
+    void whenFindById_thenReturnGoods() {
         final Goods goods = new Goods(1,"Laptop Acer Aspire 5 A515-54G-502N", new BigDecimal("600.57"));
 
         given(goodsRepository.findById(1L)).willReturn(Optional.of(goods));
@@ -35,7 +35,7 @@ class GoodsServiceTest {
     }
 
     @Test
-    void findByIdsTest() {
+    void whenFindByIds_thenReturnListGoods() {
         final List<Goods> goods = new ArrayList<>();
         goods.add(new Goods(1,"Laptop Acer Aspire 5 A515-54G-502N", new BigDecimal("600.57")));
         goods.add(new Goods(2,"Samsung Galaxy S10 Plus", new BigDecimal("560")));

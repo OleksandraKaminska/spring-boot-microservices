@@ -28,7 +28,7 @@ class OrderServiceTest {
     private OrderService orderService;
 
     @Test
-    void findByIdTest() throws ParseException {
+    void whenFindById_thenReturnOrder() throws ParseException {
         Order order = new Order();
         order.setId(1L);
         order.setUserId(2L);
