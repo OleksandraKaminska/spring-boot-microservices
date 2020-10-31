@@ -1,5 +1,7 @@
 package com.softserve.orderservice.controller;
 
+import com.softserve.orderservice.dto.GoodsDTO;
+import com.softserve.orderservice.dto.OrderDTO;
 import com.softserve.orderservice.model.Goods;
 import com.softserve.orderservice.model.Item;
 import com.softserve.orderservice.model.Order;
@@ -27,16 +29,16 @@ public class OrderController {
     private RestTemplate restTemplate;
 
     @RequestMapping("/{id}")
-    public Order getOrder(@PathVariable("id") Long id) {
+    public OrderDTO getOrder(@PathVariable("id") Long id) {
         Order order = orderService.findById(id);
-//        ResponseEntity<List<Goods>> response = restTemplate.exchange("http://goods-service/goods", HttpMethod.GET, null,
-//                new ParameterizedTypeReference<>() {
-//                },
-//                order.getItems().stream().map(Item::getId).collect(Collectors.toList()));
-//        System.out.println(response.getBody());
-        Goods goods = restTemplate.getForObject("http://goods-service/goods/1", Goods.class);
-        System.out.println(goods);
-        return null;
+        List<Long> orderGoodsIds = order.getItems().stream().map(Item::getId).collect(Collectors.toList());
+        ResponseEntity<List<Goods>> response = restTemplate.exchange("http://goods-service/goods/list?ids=" +
+                        orderGoodsIds.stream().map(l -> Long.toString(l)).collect(Collectors.joining(",")),
+                HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
+
+        return new OrderDTO(order.getId(), order.getUserId(), order.getShippingDestination(), order.getOrderDate(),
+                response.getBody().stream().map(g -> new GoodsDTO(g.getName(), g.getPrice())).collect(Collectors.toList()));
+
     }
 
 }

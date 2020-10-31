@@ -1,20 +1,21 @@
-package com.softserve.orderservice.model;
+package com.softserve.orderservice.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
 @ToString
-public class OrderInfo {
+@NoArgsConstructor
+@AllArgsConstructor
+public class OrderDTO {
 
     private long id;
     private long userId;
     private String shippingDestination;
     private Date orderDate;
-
+    private List<GoodsDTO> goods;
 
 }
